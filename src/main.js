@@ -3,8 +3,17 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'swiper/swiper.scss'
+ 
+Vue.use(VueAwesomeSwiper)
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 
-Vue.config.productionTip = false
+Vue.config.productioxnTip = false
 
 new Vue({
   router,
