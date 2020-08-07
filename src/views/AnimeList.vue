@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <b-col v-for="(anime, index) in animes" lg="2" md="3" sm="4" :key="index">
+            <b-col v-for="(anime, index) in animes" lg="2" md="3" sm="4" class="mb-4" :key="index">
                 <Card :anime="anime" />
             </b-col>
         </div>
