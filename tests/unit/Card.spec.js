@@ -17,6 +17,15 @@ describe('Card.vue', () => {
     watching_status: 2
   }
 
+  const { 
+    image_url, 
+    url, 
+    title, 
+    total_episodes, 
+    score, 
+    watching_status
+  } = anime
+  
   beforeEach(() => {
     wrapper = shallowMount(Card, {
       localVue,
@@ -25,18 +34,47 @@ describe('Card.vue', () => {
   })
 
   it('render imageUrl', () => {
-      expect(wrapper.vm.imageUrl).toBe(anime.image_url)
+    expect(typeof image_url).toBe('string')
+    expect(wrapper.vm.imageUrl).toBe(image_url)
   })
 
   it('render title', () => {
-    expect(wrapper.vm.title).toBe(anime.title)
+    expect(typeof title).toBe('string')
+    expect(wrapper.vm.title).toBe(title)
   })
 
   it('render url', () => {
-    expect(wrapper.vm.url).toBe(anime.url)
+    expect(typeof url).toBe('string')
+    expect(wrapper.vm.url).toBe(url)
   })
 
   it('render total episodes', () => {
-    expect(wrapper.vm.totalEpisodes).toBe(`${anime.total_episodes} Episode(s)`)
+    expect(typeof total_episodes).toBe('number')
+    expect(wrapper.vm.totalEpisodes).toBe(`${total_episodes} Episode(s)`)
+  })
+
+  it('render score', () => {
+    expect(typeof score).toBe('number')
+    expect(wrapper.vm.score).toBe(score)
+  })
+
+  it('function validateStatus', () => {
+    const { color, icon } = wrapper.vm.validateStatus(watching_status)
+    expect(typeof color).toBe('string')
+    expect(typeof icon).toBe('string')
+  })
+
+  it('render color', () => {
+    const { color } = wrapper.vm.validateStatus(watching_status)
+    expect(wrapper.vm.color).toBe(color)
+  })
+
+  it('render icon', () => {
+    const { icon } = wrapper.vm.validateStatus(watching_status)
+    expect(wrapper.vm.icon).toBe(icon)
+  })
+
+  it('click', () => {
+    console.log(wrapper.trigger('click'))
   })
 })

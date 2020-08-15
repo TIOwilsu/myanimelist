@@ -23,6 +23,7 @@
   </b-card>
 </template>
 <script>
+
 export default {
     name: 'Card',
     props: {
@@ -70,7 +71,7 @@ export default {
             if(status === 4){
                 return { color: 'danger', icon: 'x' }
             }
-            if(status === 5){
+            if(status === 6){
                 return { color: 'secondary', icon: 'stopwatch' }
             }
         }
