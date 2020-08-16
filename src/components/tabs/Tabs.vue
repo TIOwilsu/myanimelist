@@ -1,5 +1,5 @@
 <template>
-    <b-tabs>
+    <b-tabs lazy>
         <b-tab v-for="(header,index) in headers" :title="header" :key="index" @click="tab">
             <b-row>
                 <template v-if="hasItems && !loading">
@@ -58,15 +58,15 @@ export default {
 </script>
 <style lang="scss">
     .tabs{
-        margin-bottom: 12px;
         & .nav-tabs{
             background-color: $gray-600;
             border-bottom: none;
             padding: 4px 4px 0;
+            margin-bottom: 1.5rem;
             height: 36px;
         }
         & .nav-link{
-            background-color: $gray-700;
+            background-color: $gray-800;
             border: none;
             border-radius: 0;
             color: $white;
@@ -79,9 +79,12 @@ export default {
             &:focus{
                 outline: none;
             }
+            &:hover{
+                background-color: $gray-900;
+            }
             &.active{
                 background-color: $white;
-                color: $gray-700;
+                color: $gray-800;
             }
         }
     }

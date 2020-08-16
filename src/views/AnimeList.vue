@@ -1,10 +1,11 @@
 <template>
     <b-container>
         <Tabs 
-            :headers="headers" 
-            :items="animes" 
-            :loading="loading" 
-            @onTab="onTab" />
+        :headers="headers" 
+        :items="uploadedAnime" 
+        :loading="loading" 
+        @onTab="onTab" /> 
+        <b-btn v-show="IsButtonDisplayed" @click="uploadAnimes">Mais Séries</b-btn>
     </b-container>
 </template>
 <script>
@@ -12,13 +13,17 @@ import Tabs from '@/components/tabs/Tabs'
 import { getAllAnimeList } from '@/services/user'
 
 export default {
+    name: 'anime-list',
     components: {
         Tabs
     },
     data:() => ({
-        animes: [],
+        anime: [],
+        uploadedAnime: [],
         status: 'all',
-        loading: false
+        loading: false,
+        limit: 0,
+        IsButtonDisplayed: true
     }),
     computed:{
         headers() {
@@ -39,9 +44,10 @@ export default {
         async fetch(){
             try{
                 this.loading = true
-                const { status, loadItems } = this
-                const { anime } = await getAllAnimeList('Shawdon255', status)
-                loadItems(anime)
+                const { status, uploadAnimes } = this
+                const { anime } = await getAllAnimeList('TIOwilsu', status)
+                this.anime = anime
+                uploadAnimes()
             } catch(err){
                 console.log(err)
             } finally{
@@ -49,15 +55,17 @@ export default {
             }
         },
         onTab(status){
-            this.animes = []
+            this.anime = []
+            this.uploadedViewed = []
+            this.limit = 0
+            this.IsButtonDisplayed = true
             this.status = status
             this.fetch()
         },
-        loadItems(items){
-            items.map((item,index) => {
-                if(index >= 12) return false
-                this.animes.push(item)
-            })
+        uploadAnimes(){
+            this.limit+= 12
+            this.uploadedAnime = this.anime.filter((anime,index) => index < this.limit)
+            if(this.uploadedAnime.length === this.anime.length) this.IsButtonDisplayed = false
         }
     }
 }
